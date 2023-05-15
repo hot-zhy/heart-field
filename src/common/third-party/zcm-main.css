@@ -2,6 +2,12 @@
 image {
   will-change: transform;
 }
+main-color{
+	color:#0dc919;
+}
+main-bg-color{
+	background-color: #A7E5B1;
+}
 /* scroll-view */
 .scroll-row {
   width: 100%;

@@ -1,5 +1,5 @@
 {
-    "name" : "心灵绿野",
+    "name" : "heart-field",
     "appid" : "__UNI__EB70E8F",
     "description" : "",
     "versionName" : "1.0.0",
@@ -30,7 +30,7 @@
         "setting" : {
             "urlCheck" : false,
             "postcss" : true,
-			"checkSiteMap" : false 
+            "checkSiteMap" : false
         },
         "usingComponents" : true
     },
