@@ -17,7 +17,20 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {}
+        "modules" : {
+            "OAuth" : {}
+        },
+        "distribute" : {
+            "sdkConfigs" : {
+                "oauth" : {
+                    "weixin" : {
+                        "appid" : "wxb9f9c2c27af57638",
+						"appsecret": "590c67ac1ae76ecebf7728d511b5fcb3",
+                        "UniversalLinks" : ""
+                    }
+                }
+            }
+        }
     },
     /* 快应用特有相关 */
     "quickapp" : {},
@@ -30,7 +43,7 @@
         "setting" : {
             "urlCheck" : false,
             "postcss" : true,
-			"checkSiteMap" : false 
+            "checkSiteMap" : false
         },
         "usingComponents" : true
     },
