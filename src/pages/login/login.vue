@@ -10,7 +10,7 @@
 			<text>{{wxLoginText}}</text>
 		</button>
 		<view class="agree-privacy">
-			<radio class="agree-radio" :value="agreeRedio" @click.native.prevent="agreeRedio=!agreeRedio"></radio>
+			<radio class="agree-radio" :value="agreeRedio"></radio>
 			<text class="hint">{{agreeText[0]}}</text>
 			<text class="link" @click="gotoAgreementPage('user')">{{userServiceText}}</text>
 		 	<text class="hint">{{agreeText[1]}}</text>
@@ -50,12 +50,15 @@
 						desc: '用户信息展示',
 						success: (info) => {
 							uni.showLoading()
+							console.log(info)
+							console.log(this.code)
 							login({
 								'code': this.code,
 								'encryptedData': info.encryptedData,
 								'iv': info.iv
 							}).then((res)=>{
 								uni.hideLoading()
+								console.log(res)
 								uni.setStorage({
 									key: 'user',
 									data: {
