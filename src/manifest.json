@@ -25,7 +25,6 @@
                 "oauth" : {
                     "weixin" : {
                         "appid" : "wxb9f9c2c27af57638",
-						"appsecret": "590c67ac1ae76ecebf7728d511b5fcb3",
                         "UniversalLinks" : ""
                     }
                 }
