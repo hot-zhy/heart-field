@@ -10,7 +10,7 @@
 			<text>{{wxLoginText}}</text>
 		</button>
 		<view class="agree-privacy">
-			<radio class="agree-radio" :value="agreeRedio"></radio>
+			<radio class="agree-radio" :value="agreeRedio" @click.native.prevent="agreeRedio=true"></radio>
 			<text class="hint">{{agreeText[0]}}</text>
 			<text class="link" @click="gotoAgreementPage('user')">{{userServiceText}}</text>
 		 	<text class="hint">{{agreeText[1]}}</text>
