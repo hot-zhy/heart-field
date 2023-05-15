@@ -1,0 +1,70 @@
+{
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
+      "path": "pages/consult/consult",
+      "style": {
+        "navigationBarTitleText": "咨询",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/my/my",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "enablePullDownRefresh": true
+      }
+    },
+	{
+	  "path": "pages/login/login",
+	  "style": {
+	    "navigationBarTitleText": "登录",
+		"navigationStyle": "custom",
+	    "enablePullDownRefresh": false,
+		"navigationBarTextStyle":"black"
+	  }
+	}
+        ,{
+            "path" : "pages/agreement/agreement",
+            "style" :                                                                                    
+            {
+				"navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "心灵绿野",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "custom": false,
+    "color": "#7A7E83",
+    "selectedColor": "#a6fc64",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/consult/consult",
+        "text": "咨询"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的"
+      }
+    ]
+  }
+}

@@ -61,7 +61,7 @@
 									data: {
 										'token': res.data.accessToken,
 										'id': res.data.userId,
-										'info': {}
+										'info': res.data.userInfo
 									},
 								}).then(()=>{
 									uni.reLaunch({ url: '/pages/index/index' })
