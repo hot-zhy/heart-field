@@ -3,7 +3,7 @@ import request from '@/common/request.js'
 
 export function login(data) {
 	return request({
-		url: '/auth/visitor/login',
+		url: '/visitor/auth/login',
 		method: 'POST',
 		data
 	})
