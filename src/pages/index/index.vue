@@ -11,7 +11,7 @@
 						<input ref="getValue" v-model="searchValue" class="ml-2" maxlength="20" placeholder="点击搜索咨询师"
 							type="text" />
 						<image class="search-icon mr-1" mode="widthFix"
-							src="https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/search.png"
+							:src="searchIcon"
 							@tap="onClickSearch()">
 						</image>
 					</view>
@@ -58,10 +58,11 @@
 <script>
 	import zeroWaterfall from "@/uni_modules/zero-waterfall/components/zero-waterfall/zero-waterfall.vue";
 	import tabBar from "@/components/tab-bar/tab-bar.vue";
-	import uniLoadMore from "@/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"
+	import uniLoadMore from "@/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue";
 	import {
 		getConsultants
-	} from "@/common/api.js"
+	} from "@/common/api.js";
+	import {Icons,Pictures} from "@/common/url.js";
 	export default {
 		components: {
 			zeroWaterfall,
@@ -78,8 +79,9 @@
 				pageSize: 5,
 				sortType: 0,
 				sort: 0,
-				happyCountImage: "https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png",
-				helpCountImage: "https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png",
+				happyCountImage: Icons.DownSort,
+				helpCountImage: Icons.DownSort,
+				searchIcon:Icons.Search,
 				happyClickCount:0,
 				helpClickCount:0
 			}
@@ -111,12 +113,12 @@
 			visitorsHappyCount() {
 				this.sortType = 0
 				this.happyClickCount++
-				this.happyCountImage=this.happyClickCount%2===0?"https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png":"https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/up-sort.png"
+				this.happyCountImage=this.happyClickCount%2===0?Icons.DownSort:Icons.UpSort
 			},
 			helpVisitorsCount() {
 				this.sortType = 1
 				this.helpClickCount++
-				this.helpCountImage=this.helpClickCount%2===0?"https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png":"https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/up-sort.png"
+				this.helpCountImage=this.helpClickCount%2===0?Icons.DownSort:Icons.UpSort
 			},
 			isAvailable() {
 				this.sortType = 2
