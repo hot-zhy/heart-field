@@ -3,8 +3,8 @@
 		<!-- 顶部图片和搜索栏 -->
 		<view
 			style="background-image: url(https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/index-background.png);"
-			class="d-flex a-center j-center top-image">
-			<view class="d-flex a-center j-center w-100">
+			class="d-flex j-center top-image">
+			<view class="d-flex j-center w-100" style="margin-top: 13vh;">
 				<view class="font-weight consultant">心灵绿野</view>
 				<view class="d-flex border a-center j-sb search">
 					<view class="d-flex a-center">
@@ -23,7 +23,7 @@
 			<view class="d-flex a-center j-sb">
 				<!-- 用户满意度 -->
 				<view class="d-flex a-center j-center">
-					<view class="font-weight" style="font-size: 30rpx;">用户满意度</view>
+					<view class="font-weight" style="font-size:27rpx;">用户满意度</view>
 					<view>
 						<image src="https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png"
 							mode="widthFix" class="sortIcon"></image>
@@ -31,7 +31,7 @@
 				</view>
 				<!-- 帮助用户数 -->
 				<view class="d-flex a-center j-center">
-					<view class="font-weight" style="font-size: 30rpx;">帮助用户数</view>
+					<view class="font-weight" style="font-size: 27rpx;">帮助用户数</view>
 					<view>
 						<image src="https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png"
 							mode="widthFix" class="sortIcon"></image>
@@ -39,7 +39,7 @@
 				</view>
 				<!-- 是否空闲 -->
 				<view class="d-flex a-center j-center">
-					<view class="font-weight mr-1" style="font-size: 30rpx;">是否空闲</view>
+					<view class="font-weight mr-1" style="font-size: 27rpx;">是否空闲</view>
 					<view>
 						<checkbox :checked="isChecked" @click="avaliableChecked" class="checkbox"></checkbox>
 					</view>
@@ -82,6 +82,11 @@
 		created() {
 			this.dataList = this.arr.slice(0, 5)
 		},
+		onPullDownRefresh(){
+			uni.reLaunch({
+				url:'/pages/index/index'
+			})
+		},
 		onLoad() {
 			getConsultants({
 				page: 1,
@@ -118,7 +123,10 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style>
+	body,page{
+		background-color: #EDEDED;
+	}
 	.top-image {
 		height: 24vh;
 	}
@@ -155,18 +163,17 @@
 
 	.consultant {
 		width: 30vw;
-		font-size: 5.5vw;
+		font-size: 6vw;
 	}
 
 	.search {
 		border-radius: 30rpx;
 		width: 55vw;
+		height: 8.5vw;
+		border-width: 3.6rpx;
+	}
+	.search-icon {
+		width: 70rpx;
 		height: 70rpx;
-		border-width: 4.9rpx;
-
-		.search-icon {
-			width: 70rpx;
-			height: 70rpx;
-		}
 	}
 </style>

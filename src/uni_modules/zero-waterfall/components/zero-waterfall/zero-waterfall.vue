@@ -30,7 +30,7 @@
 						<uni-rate :readonly="true" :value="item.averageRank"></uni-rate>
 					</view>
 					<view class="briefIntroduction">{{item.briefIntroduction}}</view>
-					<view class="d-flex j-sb mx-1 flex-wrap py-1">
+					<view class="d-flex mx-1 flex-wrap py-1">
 						<view class="text-center tag" v-for="(itemtag,index) in item.expertiseTag.slice(0,3)">
 							{{itemtag.tagName}}
 						</view>
@@ -75,7 +75,7 @@
 						<uni-rate :readonly="true" :value="item.averageRank"></uni-rate>
 					</view>
 					<view class="briefIntroduction">{{item.briefIntroduction}}</view>
-					<view class="d-flex j-sb mx-1 flex-wrap py-1">
+					<view class="d-flex mx-1 flex-wrap py-1">
 						<view class="text-center tag" v-for="(itemtag,index) in item.expertiseTag.slice(0,3)">
 							{{itemtag.tagName}}
 						</view>
@@ -199,13 +199,14 @@
 	}
 
 	.tag {
-		font-size: 30rpx;
+		font-size: 25rpx;
 		background-color: #F0FAF2;
 		border: solid #65BE77;
 		border-radius: 10rpx;
 		border-width: 0.1em;
 		margin-top: 10rpx;
-		max-width: 200rpx;
+		margin-left: 10rpx;
+		max-width: 150rpx;
 		padding-left: 10rpx;
 		padding-right: 10rpx;
 		/*定义块元素的宽度*/
@@ -218,10 +219,10 @@
 	}
 
 	.briefIntroduction {
-		font-size: 30rpx;
+		font-size: 27rpx;
 		margin-left: 10rpx;
 		margin-right: 10rpx;
-		margin-bottom: 10rpx;
+		margin-top: 10rpx;
 		color: #777A7F;
 		text-align: center;
 	}
@@ -259,7 +260,7 @@
 	.waterfall_item {
 		width: 100%;
 		margin: 10rpx 0 40rpx 0;
-		background-color: #EDEDED;
+		background-color: #ffffff;
 		border-radius: 20rpx;
 		overflow: hidden;
 

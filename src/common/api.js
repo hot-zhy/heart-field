@@ -13,13 +13,6 @@ export function getConsultants(data) {
 	return request({
 		url: '/consultants',
 		method: 'GET',
-		data,
-		success(res) {
-		  if (res.statusCode !== 200) {
-		    reject(res);
-		  }
-		  const data = res.data
-		  resolve(data);
-		}
+		data
 	})
 }

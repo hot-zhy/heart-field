@@ -1,5 +1,5 @@
 const SEVERURL ='https://mock.apifox.cn/m1/2680723-0-default'; //请求地址  
-const WITHEURL = ['/auth/visitor/login', ]; // 无须TOKEN登录的白名单
+const WITHEURL = ['/visitor/auth/login', ]; // 无须TOKEN登录的白名单
 
 
 function service(options = {}) {
