@@ -51,36 +51,39 @@
 
 			</zero-waterfall>
 		</view>
-		<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus" @clickLoadMore='loadMore'></uni-load-more>
+		<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus" @clickLoadMore='getOneNewPageConsultants'></uni-load-more>
 		<tab-bar activeIndex="0"></tab-bar>
 	</view>
 </template>
 
 <script>
 	import zeroWaterfall from "@/uni_modules/zero-waterfall/components/zero-waterfall/zero-waterfall.vue";
-	import uniLoadMore from "@/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue";
 	import tabBar from "@/components/tab-bar/tab-bar.vue";
+	import uniLoadMore from "@/uni_modules/uni-load-more/components/uni-load-more/uni-load-more.vue"
 	import {
 		getConsultants
 	} from "@/common/api.js"
 	export default {
 		components: {
 			zeroWaterfall,
-			uniLoadMore,
-			tabBar
+			tabBar,
+			uniLoadMore
 		},
 		data() {
 			return {
 				arr: [],
 				loading: false,
-				dataList: [],
+				dataList: [
+				],
 				loadStatus: 'more',
 				page: 1,
 				pageSize: 5,
+				contentText:{
+					contentDown:'查看更多',
+					contentRefresh:"加载中",
+					contentnomore:"没有更多了"
+				}
 			}
-		},
-		created() {
-			this.dataList = this.arr.slice(0, 5)
 		},
 		onPullDownRefresh(){
 			uni.reLaunch({
@@ -88,37 +91,24 @@
 			})
 		},
 		onLoad() {
-			getConsultants({
-				page: 1,
-				pageSize: 10,
-				sortType: 0,
-				sort: 0
-			}).then((res) => {
-				for (let i = 0; i < res.data.data.length; i++) {
-					this.arr.push(res.data.data[i])
-				}
-			});
-			this.loadMore()
+			this.page=0
+			this.getOneNewPageConsultants()
+			console.log(this.dataList);
 		},
-		onReachBottom() {
-			if (this.dataList.length >= this.arr.length) {
-				this.loadingStatus = 'noMore'
-			} else {
-				this.loadStatus = 'more';
-				setTimeout(() => {
-					this.loadMore();
-					this.loadStatus = 'loadmore';
-				}, 1000)
-			}
+		onReachBottom(){
+			this.getOneNewPageConsultants()
 		},
 		methods: {
-			// 模拟数据加载
-			loadMore() {
-				this.loadStatus = 'loading';
-				this.page++
-				this.dataList = this.dataList.concat(this.arr.slice(this.dataList.length, this.page * this.pageSize))
-			},
-
+			getOneNewPageConsultants(){
+				getConsultants({
+					page: this.page++,
+					pageSize: 10,
+					sortType: 0,
+					sort: 0
+				}).then((res) => {
+					this.dataList=this.dataList.concat(res.data.data)
+				});
+			}
 		}
 	}
 </script>

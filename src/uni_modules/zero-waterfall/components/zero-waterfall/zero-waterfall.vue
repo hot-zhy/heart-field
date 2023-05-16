@@ -6,11 +6,11 @@
 				<view class="mt-1">
 					<view class="state-available d-flex a-center j-end" v-if="item.consultState===0">
 						<view class="red mr-1"></view>
-						<view class="text-center mr-2" style="font-size: 30rpx;">空闲</view>
+						<view class="text-center mr-2" style="font-size: 27rpx;">空闲</view>
 					</view>
 					<view class="state-not-available d-flex a-center j-end" v-if="item.consultState===1">
 						<view class="green mr-1"></view>
-						<view class="text-center mr-2" style="font-size: 30rpx;">忙碌</view>
+						<view class="text-center mr-2" style="font-size: 27rpx;">忙碌</view>
 					</view>
 				</view>
 				<view class="item_img d-flex a-center j-center">
@@ -51,11 +51,11 @@
 				<view class="mt-1">
 					<view class="state-available d-flex a-center j-end" v-if="item.consultState===0">
 						<view class="red mr-1"></view>
-						<view class="text-center mr-2" style="font-size: 30rpx;">空闲</view>
+						<view class="text-center mr-2" style="font-size: 27rpx;">空闲</view>
 					</view>
 					<view class="state-not-available d-flex a-center j-end" v-if="item.consultState===1">
 						<view class="green mr-1"></view>
-						<view class="text-center mr-2" style="font-size: 30rpx;">忙碌</view>
+						<view class="text-center mr-2" style="font-size: 27rpx;">忙碌</view>
 					</view>
 				</view>
 				<view class="item_img d-flex a-center j-center">
