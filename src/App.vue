@@ -14,4 +14,8 @@ export default {
 
 <style>
 @import "@/common/third-party/zcm-main.css";
+@font-face{
+	font-family: iconfont;
+	src: url('https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/icon/iconfont.ttf') format('truetype');
+} 
 </style>
