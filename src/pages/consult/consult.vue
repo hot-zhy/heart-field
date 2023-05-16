@@ -1,12 +1,29 @@
 <template>
-  <view>
-	  <TabBar activeIndex="1"></TabBar>
+  <view style="background-color: #A7E5B1;">
+	  <tab-bar activeIndex="1"></tab-bar>
   </view>
 </template>
 
 
-<script setup lang="ts">
-	import TabBar from "@/components/tab-bar/tab-bar.vue";
+<script>
+	import tabBar from "@/components/tab-bar/tab-bar.vue";
+	export default{
+		components:{
+			tabBar
+		},
+		data(){
+			return{
+				
+			}
+		},
+		methods:{
+			
+		}
+	}
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+page{
+	background-color: #A7E5B1
+}
+</style>

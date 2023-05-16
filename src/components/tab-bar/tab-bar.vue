@@ -82,14 +82,13 @@
 	}
 
 	.tabbar-body {
-		border-radius: 80rpx;
-		height: 150rpx;
+		height: 120rpx;
 		display: flex;
 		background: linear-gradient(to right, #ffffff, #edffeb);
 		position: fixed;
-		bottom: 45rpx;
-		width: 704rpx;
-		left: 24rpx;
+		bottom: 0rpx;
+		width:100%;
+		left: 0rpx;
 		z-index: 1001;
 		padding-top: 8rpx;
 		box-shadow: 0px 0px 30rpx 9rpx rgba(13, 6, 0, 0.1);
