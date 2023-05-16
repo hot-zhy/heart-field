@@ -22,24 +22,22 @@
 		<view class="mx-4 top-options my-2">
 			<view class="d-flex a-center j-sb">
 				<!-- 用户满意度 -->
-				<view class="d-flex a-center j-center">
-					<view class="font-weight" style="font-size:27rpx;">用户满意度</view>
+				<view class="d-flex a-center j-center" @click="visitorsHappyCount">
+					<view style="font-size:27rpx;" :class="sortType===0?'main-color':''">用户满意度</view>
 					<view>
-						<image src="https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png"
-							mode="widthFix" class="sortIcon"></image>
+						<image :src="happyCountImage" mode="widthFix" class="sortIcon"></image>
 					</view>
 				</view>
 				<!-- 帮助用户数 -->
-				<view class="d-flex a-center j-center">
-					<view class="font-weight" style="font-size: 27rpx;">帮助用户数</view>
+				<view class="d-flex a-center j-center" @click="helpVisitorsCount">
+					<view :class="sortType===1?'main-color':''" style="font-size: 27rpx;">帮助用户数</view>
 					<view>
-						<image src="https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png"
-							mode="widthFix" class="sortIcon"></image>
+						<image :src="helpCountImage" mode="widthFix" class="sortIcon"></image>
 					</view>
 				</view>
 				<!-- 是否空闲 -->
-				<view class="d-flex a-center j-center">
-					<view class="font-weight mr-1" style="font-size: 27rpx;">是否空闲</view>
+				<view class="d-flex a-center j-center" @click="isAvailable">
+					<view :class="sortType===2?'main-color':''" class="mr-1" style="font-size: 27rpx;">是否空闲</view>
 					<view>
 						<checkbox :checked="isChecked" @click="avaliableChecked" class="checkbox"></checkbox>
 					</view>
@@ -50,10 +48,11 @@
 			<zero-waterfall :list="dataList">
 
 			</zero-waterfall>
+			<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus" @clickLoadMore='getOneNewPageConsultants'>
+			</uni-load-more>
 		</view>
-		<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus" @clickLoadMore='getOneNewPageConsultants'></uni-load-more>
-		<tab-bar activeIndex="0"></tab-bar>
 	</view>
+	<tab-bar activeIndex="0"></tab-bar>
 </template>
 
 <script>
@@ -73,50 +72,70 @@
 			return {
 				arr: [],
 				loading: false,
-				dataList: [
-				],
+				dataList: [],
 				loadStatus: 'more',
 				page: 1,
 				pageSize: 5,
-				contentText:{
-					contentDown:'查看更多',
-					contentRefresh:"加载中",
-					contentnomore:"没有更多了"
-				}
+				sortType: 0,
+				sort: 0,
+				happyCountImage: "https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png",
+				helpCountImage: "https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png",
+				happyClickCount:0,
+				helpClickCount:0
 			}
 		},
-		onPullDownRefresh(){
+		onPullDownRefresh() {
 			uni.reLaunch({
-				url:'/pages/index/index'
+				url: '/pages/index/index'
 			})
 		},
 		onLoad() {
-			this.page=0
+			this.page = 0
 			this.getOneNewPageConsultants()
 			console.log(this.dataList);
 		},
-		onReachBottom(){
+		onReachBottom() {
 			this.getOneNewPageConsultants()
 		},
 		methods: {
-			getOneNewPageConsultants(){
+			getOneNewPageConsultants() {
 				getConsultants({
 					page: this.page++,
 					pageSize: 10,
 					sortType: 0,
 					sort: 0
 				}).then((res) => {
-					this.dataList=this.dataList.concat(res.data.data)
+					this.dataList = this.dataList.concat(res.data.data)
 				});
+			},
+			visitorsHappyCount() {
+				this.sortType = 0
+				this.happyClickCount++
+				this.happyCountImage=this.happyClickCount%2===0?"https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png":"https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/up-sort.png"
+			},
+			helpVisitorsCount() {
+				this.sortType = 1
+				this.helpClickCount++
+				this.helpCountImage=this.helpClickCount%2===0?"https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/down-sort.png":"https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/up-sort.png"
+			},
+			isAvailable() {
+				this.sortType = 2
 			}
 		}
 	}
 </script>
 
 <style>
-	body,page{
+	body,
+	page {
 		background-color: #EDEDED;
 	}
+
+	.main-color {
+		font-weight: 700;
+		font-size: 31rpx;
+	}
+
 	.top-image {
 		height: 24vh;
 	}
@@ -162,6 +181,7 @@
 		height: 8.5vw;
 		border-width: 3.6rpx;
 	}
+
 	.search-icon {
 		width: 70rpx;
 		height: 70rpx;
