@@ -11,9 +11,9 @@
 						<image :src="plantIcon" mode="widthFix" style="width: 60rpx;height: 60rpx;"></image>
 					</view>
 				</view>
-				<view class="d-flex border a-center j-sb search">
+				<view class="d-flex a-center j-sb search">
 					<view class="d-flex a-center">
-						<input ref="getValue" v-model="searchValue" class="ml-2" maxlength="20" placeholder="点击搜索咨询师"
+						<input ref="getValue" v-model="searchValue" class="ml-2" maxlength="20" placeholder="点击搜索咨询师" style="font-size: 4vw;font-family: ALIPH;"
 							type="search" @confirm="onKeyBoardSearch" />
 						<image class="search-icon mr-1" mode="widthFix" :src="searchIcon" @tap="onClickSearch()">
 						</image>
@@ -23,13 +23,11 @@
 		</view>
 		<!-- 顶部选项卡 -->
 		<view class="top-options">
-			<view class="d-flex a-center j-sb pt-2 pb-1">
+			<view class="d-flex a-center j-sb pt-2 pb-2 pr-2 pl-2">
 				<!-- 用户满意度 -->
 				<view class="d-flex a-center j-center ml-3" @click="visitorsHappyCount">
 					<view :class="sortType===0?'main-font':'normal-font'">用户满意度</view>
-					<view>
-						<image :src="happyCountImage" mode="widthFix" class="sortIcon"></image>
-					</view>
+					<image :src="happyCountImage" mode="widthFix" class="sortIcon"></image>
 				</view>
 				<!-- 帮助用户数 -->
 				<view class="d-flex a-center j-center" @click="helpVisitorsCount">
@@ -42,7 +40,7 @@
 				<view class="d-flex a-center j-center" @click="isAvailable">
 					<view :class="sortType===2?'main-font':'normal-font'" class="mr-1">是否空闲</view>
 					<view class="mr-2">
-						<checkbox :checked="count.isChecked" @click="avaliableChecked" class="checkbox"></checkbox>
+						<checkbox :checked="count.isChecked" @click="avaliableChecked" class="checkbox" style="transform: scale(0.7)"></checkbox>
 					</view>
 				</view>
 			</view>
@@ -95,15 +93,18 @@
 					happyClickCount: 0,
 					helpClickCount: 0
 				},
-				isRefreshing: false,
+				isRefreshing: true,
 				searchValue: ""
 			}
 		},
 		onPullDownRefresh() {
 			this.refresh();
 		},
-		onShow() {
+		onLoad() {
 			this.page = 0
+			uni.showLoading({
+				'title': '正在加载中'
+			})
 			this.getOneNewPageConsultants()
 		},
 		onReachBottom() {
@@ -140,6 +141,8 @@
 					searchValue: this.searchValue
 				}).then((res) => {
 					this.dataList = this.dataList.concat(res.data.data)
+					this.isRefreshing = false
+					uni.hideLoading()
 				});
 			},
 			visitorsHappyCount() {
@@ -190,12 +193,14 @@
 
 	.main-font {
 		font-weight: 700;
-		font-size: 32rpx;
+		font-size: 30rpx;
+		color: #2d2725;
 	}
 
 	.normal-font {
-		font-weight: 500;
-		font-size: 28rpx;
+		font-weight: 600;
+		font-size: 30rpx;
+		color: #464646;
 	}
 
 	.top-image {
@@ -211,6 +216,7 @@
 
 	.consultantList {
 		margin-bottom: 100rpx;
+		color: #2d2725;
 	}
 
 	.checkbox {}
@@ -239,17 +245,25 @@
 
 	.consultant {
 		font-size: 6vw;
+		color: #443c39;
+		font-weight: 700;
 	}
 
 	.search {
-		border-radius: 30rpx;
+		border: 10rpx solid;
+		border-radius: 20rpx;
 		width: 55vw;
 		height: 8.5vw;
 		border-width: 3.6rpx;
+		border-color: darkslategrey;
 	}
 
 	.search-icon {
-		width: 70rpx;
-		height: 70rpx;
+		width: 8vw;
+		height: 8vw;
+	}
+	
+	. {
+		color: #444444;
 	}
 </style>

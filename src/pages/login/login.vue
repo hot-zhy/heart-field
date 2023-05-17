@@ -68,6 +68,10 @@
 									},
 								}).then(()=>{
 									uni.reLaunch({ url: '/pages/index/index' })
+									uni.showToast({
+										icon: 'none',
+										title: '登录成功'
+									})
 								})
 							})
 						},

@@ -23,15 +23,15 @@
 				<view class="item_info">
 					<view class="consultantName">{{item.consultantName}}</view>
 					<view class="d-flex w-100">
-						<view class="accumulate text-center w-100">累计助人：{{item.helpCount}}</view>
+						<view class="accumulate text-center w-100" style="color: #464646;">累计助人：{{item.helpCount}}</view>
 					</view>
 					<view class="w-100 d-flex j-center">
 						<!-- 平均评级 -->
 						<uni-rate :readonly="true" :value="item.averageRank"></uni-rate>
 					</view>
 					<view class="briefIntroduction">{{item.briefIntroduction}}</view>
-					<view class="d-flex mx-1 flex-wrap py-1">
-						<view class="text-center tag" v-for="(itemtag,index) in item.expertiseTag.slice(0,3)">
+					<view class="d-flex mx-1 flex-wrap py-1 tags">
+						<view class="text-center tag" v-for="(itemtag,index) in item.expertiseTag.slice(0,2)">
 							{{itemtag.tagName}}
 						</view>
 					</view>
@@ -75,8 +75,8 @@
 						<uni-rate :readonly="true" :value="item.averageRank"></uni-rate>
 					</view>
 					<view class="briefIntroduction">{{item.briefIntroduction}}</view>
-					<view class="d-flex mx-1 flex-wrap py-1">
-						<view class="text-center tag" v-for="(itemtag,index) in item.expertiseTag.slice(0,3)">
+					<view class="d-flex mx-1 flex-wrap py-1 tags">
+						<view class="text-center tag" v-for="(itemtag,index) in item.expertiseTag.slice(0,2)">
 							{{itemtag.tagName}}
 						</view>
 					</view>
@@ -197,6 +197,11 @@
 	.state-not-available {
 		color: red;
 	}
+	
+	.tags {
+		display: flex;
+		justify-content: center;
+	}
 
 	.tag {
 		font-size: 25rpx;
@@ -206,6 +211,7 @@
 		border-width: 0.1em;
 		margin-top: 10rpx;
 		margin-left: 10rpx;
+		margin-right: 10rpx;
 		max-width: 150rpx;
 		padding-left: 10rpx;
 		padding-right: 10rpx;
@@ -219,6 +225,8 @@
 	}
 
 	.briefIntroduction {
+		padding-right: 20rpx;
+		padding-left: 20rpx;
 		font-size: 27rpx;
 		margin-left: 10rpx;
 		margin-right: 10rpx;

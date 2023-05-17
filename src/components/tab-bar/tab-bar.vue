@@ -6,7 +6,7 @@
 				<view class="tabbar-item-body" @click="switchClick(tabBarList[0],0)">
 					<view class="tabbar-item-icon">
 						<image :src="activeIndex == 0 ? tabBarList[0].selectedIconPath : tabBarList[0].iconPath"
-							style="width: 8vw; height: 8vw;"></image>
+							style="width: 6vw; height: 6vw;"></image>
 					</view>
 					<view :class="[activeIndex == 0 ? 'active' : '', 'tab-bar-text']">首页</view>
 				</view>
@@ -14,14 +14,14 @@
 				<view class="tabbar-item-body" @click="switchClick(tabBarList[1],1)">
 					<view class="tabbar-item-icon">
 						<image :src="activeIndex == 1 ? tabBarList[1].selectedIconPath : tabBarList[1].iconPath"
-							style="width:25vw; height: 14vw;"></image>
+							style="width:20vw; height: 12vw;"></image>
 					</view>
 				</view>
 				<!-- 我的 -->
 				<view class="tabbar-item-body" @click="switchClick(tabBarList[2],2)">
 					<view class="tabbar-item-icon">
 						<image :src="activeIndex == 2 ? tabBarList[2].selectedIconPath : tabBarList[2].iconPath"
-							style="width: 8vw; height: 8vw;"></image>
+							style="width: 6vw; height: 6vw;"></image>
 					</view>
 					<view :class="[activeIndex == 2 ? 'active' : '', 'tab-bar-text']">我的</view>
 				</view>
@@ -91,7 +91,7 @@
 	}
 
 	.tabbar-body {
-		height: 120rpx;
+		height: 100rpx;
 		display: flex;
 		background: linear-gradient(to right, #ffffff, #edffeb);
 		position: fixed;
@@ -99,7 +99,8 @@
 		width:100%;
 		left: 0rpx;
 		z-index: 1001;
-		padding-top: 8rpx;
+		padding-top: 10rpx;
+		padding-bottom: 5rpx;
 		box-shadow: 0px 0px 30rpx 9rpx rgba(13, 6, 0, 0.1);
 
 		.tabbar-item {
