@@ -41,6 +41,63 @@
 				"enablePullDownRefresh": false
 			}
 
+		},
+		{
+		  "path": "pages/TUIKit/TUIPages/TUIConversation/index",
+		  "style": {
+		    "navigationBarTitleText": "云通信 IM",
+		    "app-plus": {
+		    }
+		  }
+		},
+		{
+		  "path": "pages/TUIKit/TUIPages/TUIConversation/create",
+		  "style": {
+		    "navigationBarTitleText": "选择联系人",
+		    "app-plus": {
+		      "scrollIndicator": "none"
+		    }
+		  }
+		},
+		{
+		  "path": "pages/TUIKit/TUIPages/TUIChat/index",
+		  "style": {
+		    "navigationBarTitleText": "云通信 IM",
+		    "app-plus": {
+		      "scrollIndicator": "none", // 当前页面不显示滚动条
+		      "softinputNavBar": "none", // App平台在iOS上，webview中的软键盘弹出时，默认在软键盘上方有一个横条，显示着：上一项、下一项和完成等按钮
+		      "bounce": "none" // 页面回弹
+		    }
+		  }
+		},
+		{
+		  "path": "pages/TUIKit/TUIPages/TUIMine/index",
+		  "style": {
+		    "navigationBarTitleText": "我的",
+		    "app-plus": {}
+		  }
+		},
+		{
+		  "path": "pages/TUIKit/TUIPages/TUIChat/components/message-elements/video-play",
+		  "style": {
+		    "navigationBarTitleText": "云通信 IM",
+		    "app-plus": {}
+		  }
+		},
+		{
+		  "path": "pages/TUIKit/TUIPages/TUIGroup/index",
+		  "style": {
+		    "navigationBarTitleText": "群管理",
+		    "app-plus": {
+		      "scrollIndicator": "none"
+		    }
+		  }
+		},
+		{
+		  "path": "pages/TUIKit/TUIPages/TUIGroup/memberOperate",
+		  "style": {
+		    "app-plus": {}
+		  }
 		}
 	],
 	"globalStyle": {

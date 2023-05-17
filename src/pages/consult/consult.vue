@@ -1,5 +1,6 @@
 <template>
   <view style="background-color: #A7E5B1;">
+		<button @tap="chat">聊天</button>
 	  <tab-bar activeIndex="1"></tab-bar>
   </view>
 </template>
@@ -17,7 +18,11 @@
 			}
 		},
 		methods:{
-			
+			chat(){
+				uni.navigateTo({
+					url:'/pages/TUIKit/TUIPages/TUIConversation/index'
+				})
+			}
 		}
 	}
 </script>
