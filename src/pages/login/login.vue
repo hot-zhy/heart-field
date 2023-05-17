@@ -6,7 +6,7 @@
 			<view class="info2">{{infoTexts[1]}}</view>
 		</view>
 		<button class="wx-login" @click="doLogin">
-			<text class="wx-icon">&#xf0106;</text>
+			<text class="wx-icon">&#xe600;</text>
 			<text>{{wxLoginText}}</text>
 		</button>
 		<view class="agree-privacy">
