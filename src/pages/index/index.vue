@@ -42,7 +42,7 @@
 				<view class="d-flex a-center j-center" @click="isAvailable">
 					<view :class="sortType===2?'main-color':''" class="mr-1" style="font-size: 27rpx;">是否空闲</view>
 					<view class="mr-2">
-						<checkbox :checked="isChecked" @click="avaliableChecked" class="checkbox"></checkbox>
+						<checkbox :checked="count.isChecked" @click="avaliableChecked" class="checkbox"></checkbox>
 					</view>
 				</view>
 			</view>
@@ -50,9 +50,10 @@
 		<template v-if="!isRefreshing">
 			<view class="consultantList">
 				<zero-waterfall :list="dataList">
-			
+
 				</zero-waterfall>
-				<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus" @clickLoadMore='getOneNewPageConsultants'>
+				<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus"
+					@clickLoadMore='getOneNewPageConsultants'>
 				</uni-load-more>
 			</view>
 		</template>
@@ -91,8 +92,11 @@
 				helpCountImage: Icons.DownSort,
 				searchIcon: Icons.Search,
 				plantIcon: Icons.GreenPlant,
-				happyClickCount: 0,
-				helpClickCount: 0,
+				count: {
+					isChecked: false,
+					happyClickCount: 0,
+					helpClickCount: 0
+				},
 				isRefreshing: false
 			}
 		},
@@ -100,46 +104,63 @@
 			this.refresh();
 		},
 		onShow() {
-			this.refresh();
-		},
-		onLoad() {
 			this.page = 0
 			this.getOneNewPageConsultants()
-			console.log(this.dataList);
+			this.refresh()
 		},
 		onReachBottom() {
 			this.getOneNewPageConsultants()
 		},
 		methods: {
 			refresh() {
-				setTimeout(()=>{
+				setTimeout(() => {
 					uni.stopPullDownRefresh();
 					this.isRefreshing = false;
-				},1);
+				}, 1);
 				this.isRefreshing = true;
 			},
 			getOneNewPageConsultants() {
 				getConsultants({
 					page: this.page++,
 					pageSize: 10,
-					sortType: 0,
-					sort: 0
+					sortType: this.sortType,
+					sort: this.sort
 				}).then((res) => {
 					this.dataList = this.dataList.concat(res.data.data)
 				});
 			},
 			visitorsHappyCount() {
-				this.sortType = 0
-				this.happyClickCount++
-				this.happyCountImage = this.happyClickCount % 2 === 0 ? Icons.DownSort : Icons.UpSort
+				this.count.happyClickCount++
+				this.updateSort(0)
 			},
 			helpVisitorsCount() {
-				this.sortType = 1
-				this.helpClickCount++
-				this.helpCountImage = this.helpClickCount % 2 === 0 ? Icons.DownSort : Icons.UpSort
+				this.count.helpClickCount++
+				this.updateSort(1)
 			},
 			isAvailable() {
-				this.sortType = 2
+				this.count.isChecked = !this.count.isChecked
+				this.updateSort(2)
+			},
+			updateSort(type) {
+				this.sortType = type
+				const {
+					happyClickCount,
+					helpClickCount,
+					isChecked
+				} = this.count
+				if (type === 0) {
+					this.happyCountImage = happyClickCount % 2 === 0 ? Icons.DownSort : Icons.UpSort
+					this.sort = happyClickCount % 2 === 0 ? 0 : 1
+					console.log('用户满意度' + this.sort)
+				} else if (type === 1) {
+					this.helpCountImage = helpClickCount % 2 === 0 ? Icons.DownSort : Icons.UpSort
+					this.sort = helpClickCount % 2 === 0 ? 0 : 1
+					console.log('帮助用户数' + this.sort)
+				} else {
+					this.sort = isChecked === false ? 0 : 1
+					console.log('是否空闲' + this.sort);
+				}
+				this.refresh()
 			}
 		}
 	}
