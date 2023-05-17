@@ -48,9 +48,6 @@
 		<template v-if="!isRefreshing">
 			<view class="consultantList">
 				<zero-waterfall :list="dataList"></zero-waterfall>
-				<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus"
-					@clickLoadMore='getOneNewPageConsultants'>
-				</uni-load-more>
 			</view>
 		</template>
 	</view>
@@ -93,7 +90,7 @@
 					happyClickCount: 0,
 					helpClickCount: 0
 				},
-				isRefreshing: true,
+				isRefreshing: false,
 				searchValue: ""
 			}
 		},
@@ -106,6 +103,9 @@
 				'title': '正在加载中'
 			})
 			this.getOneNewPageConsultants()
+			setTimeout(() => {
+				uni.hideLoading()
+			}, 1600);
 		},
 		onReachBottom() {
 			this.getOneNewPageConsultants()
@@ -125,10 +125,14 @@
 			},
 			// 刷新列表数据
 			refresh() {
+				uni.showLoading({
+					'title': '正在加载中'
+				})
 				setTimeout(() => {
 					uni.stopPullDownRefresh();
+					uni.hideLoading()
 					this.isRefreshing = false;
-				}, 1);
+				}, 1000);
 				this.isRefreshing = true;
 			},
 			// 获取新一页咨询师列表
@@ -141,8 +145,6 @@
 					searchValue: this.searchValue
 				}).then((res) => {
 					this.dataList = this.dataList.concat(res.data.data)
-					this.isRefreshing = false
-					uni.hideLoading()
 				});
 			},
 			visitorsHappyCount() {
@@ -211,11 +213,13 @@
 		background-color: #EDEDED;
 		border-radius: 40rpx;
 		margin-top: -20rpx;
+		padding-top: 10rpx;
 		width: 100%;
+		margin-bottom: 10rpx;
 	}
 
 	.consultantList {
-		margin-bottom: 100rpx;
+		margin-bottom: 200rpx;
 		color: #2d2725;
 	}
 

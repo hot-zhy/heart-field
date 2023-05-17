@@ -23,13 +23,13 @@
 				<view class="item_info">
 					<view class="consultantName">{{item.consultantName}}</view>
 					<view class="d-flex w-100">
-						<view class="accumulate text-center w-100" style="color: #464646;">累计助人：{{item.helpCount}}</view>
+						<view class="accumulate text-center w-100" style="color: #464646;font-size: 28rpx;">累计助人 <text style="color: #3EBC24;">{{item.helpCount}}</text></view>
 					</view>
 					<view class="w-100 d-flex j-center">
 						<!-- 平均评级 -->
 						<uni-rate :readonly="true" :value="item.averageRank"></uni-rate>
 					</view>
-					<view class="briefIntroduction">{{item.briefIntroduction}}</view>
+					<view class="briefIntroduction">{{item.briefIntroduction}}</view> 
 					<view class="d-flex mx-1 flex-wrap py-1 tags">
 						<view class="text-center tag" v-for="(itemtag,index) in item.expertiseTag.slice(0,2)">
 							{{itemtag.tagName}}
@@ -68,7 +68,7 @@
 				<view class="item_info">
 					<view class="consultantName">{{item.consultantName}}</view>
 					<view class="d-flex w-100">
-						<view class="accumulate text-center w-100">累计助人：{{item.helpCount}}</view>
+						<view class="accumulate text-center w-100" style="color: #464646;font-size: 28rpx;">累计助人 <text style="color: #3EBC24;">{{item.helpCount}}</text></view>
 					</view>
 					<view class="w-100 d-flex j-center">
 						<!-- 平均评级 -->
@@ -204,7 +204,8 @@
 	}
 
 	.tag {
-		font-size: 25rpx;
+		font-size: 23rpx;
+		color: #65BE77;
 		background-color: #F0FAF2;
 		border: solid #65BE77;
 		border-radius: 10rpx;
