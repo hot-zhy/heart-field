@@ -35,6 +35,7 @@
 		props: ['activeIndex'],
 		data() {
 			return {
+				isFirstClick:true,
 				tabBarList: [{
 						iconPath: "/static/tab-bar/index.png",
 						selectedIconPath: "/static/tab-bar/index_selected.png",
@@ -63,6 +64,14 @@
 		methods: {
 			switchClick(data, index) {
 				if (index == this.activeIndex) {
+					this.isFirstClick=false
+					if(this.activeIndex==0){
+						console.log('点击');
+						
+						uni.reLaunch({
+							url:'/pages/index/index'
+						})
+					}
 					return
 				}
 				uni.switchTab({

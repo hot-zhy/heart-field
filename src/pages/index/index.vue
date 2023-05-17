@@ -4,25 +4,28 @@
 		<view
 			style="background-image: url(https://heart-field-1312908194.cos.ap-shanghai.myqcloud.com/img/index/index-background.png);"
 			class="d-flex j-center top-image">
-			<view class="d-flex j-center w-100" style="margin-top: 13vh;">
-				<view class="font-weight consultant">心灵绿野</view>
+			<view class="d-flex j-center w-100 a-center" style="margin-top: 5vh;">
+				<view class="d-flex a-center j-center">
+					<view class="font-weight consultant">心灵绿野</view>
+					<view class="d-flex a-center j-center mr-2">
+						<image :src="plantIcon" mode="widthFix" style="width: 60rpx;height: 60rpx;"></image>
+					</view>
+				</view>
 				<view class="d-flex border a-center j-sb search">
 					<view class="d-flex a-center">
 						<input ref="getValue" v-model="searchValue" class="ml-2" maxlength="20" placeholder="点击搜索咨询师"
 							type="text" />
-						<image class="search-icon mr-1" mode="widthFix"
-							:src="searchIcon"
-							@tap="onClickSearch()">
+						<image class="search-icon mr-1" mode="widthFix" :src="searchIcon" @tap="onClickSearch()">
 						</image>
 					</view>
 				</view>
 			</view>
 		</view>
 		<!-- 顶部选项卡 -->
-		<view class="mx-4 top-options my-2">
-			<view class="d-flex a-center j-sb">
+		<view class="top-options">
+			<view class="d-flex a-center j-sb pt-2 pb-1">
 				<!-- 用户满意度 -->
-				<view class="d-flex a-center j-center" @click="visitorsHappyCount">
+				<view class="d-flex a-center j-center ml-3" @click="visitorsHappyCount">
 					<view style="font-size:27rpx;" :class="sortType===0?'main-color':''">用户满意度</view>
 					<view>
 						<image :src="happyCountImage" mode="widthFix" class="sortIcon"></image>
@@ -38,19 +41,21 @@
 				<!-- 是否空闲 -->
 				<view class="d-flex a-center j-center" @click="isAvailable">
 					<view :class="sortType===2?'main-color':''" class="mr-1" style="font-size: 27rpx;">是否空闲</view>
-					<view>
+					<view class="mr-2">
 						<checkbox :checked="isChecked" @click="avaliableChecked" class="checkbox"></checkbox>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="consultantList">
-			<zero-waterfall :list="dataList">
-
-			</zero-waterfall>
-			<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus" @clickLoadMore='getOneNewPageConsultants'>
-			</uni-load-more>
-		</view>
+		<template v-if="!isRefreshing">
+			<view class="consultantList">
+				<zero-waterfall :list="dataList">
+			
+				</zero-waterfall>
+				<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus" @clickLoadMore='getOneNewPageConsultants'>
+				</uni-load-more>
+			</view>
+		</template>
 	</view>
 	<tab-bar activeIndex="0"></tab-bar>
 </template>
@@ -62,7 +67,10 @@
 	import {
 		getConsultants
 	} from "@/common/api.js";
-	import {Icons,Pictures} from "@/common/url.js";
+	import {
+		Icons,
+		Pictures
+	} from "@/common/url.js";
 	export default {
 		components: {
 			zeroWaterfall,
@@ -81,15 +89,18 @@
 				sort: 0,
 				happyCountImage: Icons.DownSort,
 				helpCountImage: Icons.DownSort,
-				searchIcon:Icons.Search,
-				happyClickCount:0,
-				helpClickCount:0
+				searchIcon: Icons.Search,
+				plantIcon: Icons.GreenPlant,
+				happyClickCount: 0,
+				helpClickCount: 0,
+				isRefreshing: false
 			}
 		},
 		onPullDownRefresh() {
-			uni.reLaunch({
-				url: '/pages/index/index'
-			})
+			this.refresh();
+		},
+		onShow() {
+			this.refresh();
 		},
 		onLoad() {
 			this.page = 0
@@ -100,6 +111,13 @@
 			this.getOneNewPageConsultants()
 		},
 		methods: {
+			refresh() {
+				setTimeout(()=>{
+					uni.stopPullDownRefresh();
+					this.isRefreshing = false;
+				},1);
+				this.isRefreshing = true;
+			},
 			getOneNewPageConsultants() {
 				getConsultants({
 					page: this.page++,
@@ -113,12 +131,12 @@
 			visitorsHappyCount() {
 				this.sortType = 0
 				this.happyClickCount++
-				this.happyCountImage=this.happyClickCount%2===0?Icons.DownSort:Icons.UpSort
+				this.happyCountImage = this.happyClickCount % 2 === 0 ? Icons.DownSort : Icons.UpSort
 			},
 			helpVisitorsCount() {
 				this.sortType = 1
 				this.helpClickCount++
-				this.helpCountImage=this.helpClickCount%2===0?Icons.DownSort:Icons.UpSort
+				this.helpCountImage = this.helpClickCount % 2 === 0 ? Icons.DownSort : Icons.UpSort
 			},
 			isAvailable() {
 				this.sortType = 2
@@ -142,7 +160,12 @@
 		height: 24vh;
 	}
 
-	.top-options {}
+	.top-options {
+		background-color: #EDEDED;
+		border-radius: 40rpx;
+		margin-top: -20rpx;
+		width: 100%;
+	}
 
 	.consultantList {
 		margin-bottom: 100rpx;
@@ -173,7 +196,6 @@
 	}
 
 	.consultant {
-		width: 30vw;
 		font-size: 6vw;
 	}
 
