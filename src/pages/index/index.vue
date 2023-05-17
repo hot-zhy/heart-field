@@ -14,7 +14,7 @@
 				<view class="d-flex border a-center j-sb search">
 					<view class="d-flex a-center">
 						<input ref="getValue" v-model="searchValue" class="ml-2" maxlength="20" placeholder="点击搜索咨询师"
-							type="text" />
+							type="search" @confirm="onKeyBoardSearch" />
 						<image class="search-icon mr-1" mode="widthFix" :src="searchIcon" @tap="onClickSearch()">
 						</image>
 					</view>
@@ -109,6 +109,7 @@
 		onReachBottom() {
 			this.getOneNewPageConsultants()
 		},
+		
 		methods: {
 			// 搜索咨询师
 			onClickSearch() {
@@ -116,6 +117,10 @@
 				this.page = 0
 				this.refresh()
 				this.getOneNewPageConsultants()
+			},
+			// 键盘搜索回车
+			onKeyBoardSearch(){
+				this.onClickSearch()
 			},
 			// 刷新列表数据
 			refresh() {
