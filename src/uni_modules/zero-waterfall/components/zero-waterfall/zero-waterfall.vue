@@ -225,6 +225,10 @@
 		margin-top: 10rpx;
 		color: #777A7F;
 		text-align: center;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
 	}
 
 	.accumulate {
