@@ -49,9 +49,7 @@
 		</view>
 		<template v-if="!isRefreshing">
 			<view class="consultantList">
-				<zero-waterfall :list="dataList">
-
-				</zero-waterfall>
+				<zero-waterfall :list="dataList"></zero-waterfall>
 				<uni-load-more bg-color="rgb(240, 240, 240)" :status="loadStatus"
 					@clickLoadMore='getOneNewPageConsultants'>
 				</uni-load-more>
@@ -97,7 +95,8 @@
 					happyClickCount: 0,
 					helpClickCount: 0
 				},
-				isRefreshing: false
+				isRefreshing: false,
+				searchValue: ""
 			}
 		},
 		onPullDownRefresh() {
@@ -106,12 +105,19 @@
 		onShow() {
 			this.page = 0
 			this.getOneNewPageConsultants()
-			this.refresh()
 		},
 		onReachBottom() {
 			this.getOneNewPageConsultants()
 		},
 		methods: {
+			// 搜索咨询师
+			onClickSearch() {
+				console.log(this.searchValue)
+				this.page = 0
+				this.refresh()
+				this.getOneNewPageConsultants()
+			},
+			// 刷新列表数据
 			refresh() {
 				setTimeout(() => {
 					uni.stopPullDownRefresh();
@@ -119,12 +125,14 @@
 				}, 1);
 				this.isRefreshing = true;
 			},
+			// 获取新一页咨询师列表
 			getOneNewPageConsultants() {
 				getConsultants({
 					page: this.page++,
-					pageSize: 10,
+					pageSize: 5,
 					sortType: this.sortType,
-					sort: this.sort
+					sort: this.sort,
+					searchValue: this.searchValue
 				}).then((res) => {
 					this.dataList = this.dataList.concat(res.data.data)
 				});
@@ -160,6 +168,9 @@
 					this.sort = isChecked === false ? 0 : 1
 					console.log('是否空闲' + this.sort);
 				}
+				this.page=0
+				// 更新数据
+				this.getOneNewPageConsultants()
 				this.refresh()
 			}
 		}
@@ -176,7 +187,8 @@
 		font-weight: 700;
 		font-size: 32rpx;
 	}
-	.normal-font{
+
+	.normal-font {
 		font-weight: 500;
 		font-size: 28rpx;
 	}
