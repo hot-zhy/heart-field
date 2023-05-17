@@ -26,21 +26,21 @@
 			<view class="d-flex a-center j-sb pt-2 pb-1">
 				<!-- 用户满意度 -->
 				<view class="d-flex a-center j-center ml-3" @click="visitorsHappyCount">
-					<view style="font-size:27rpx;" :class="sortType===0?'main-color':''">用户满意度</view>
+					<view :class="sortType===0?'main-font':'normal-font'">用户满意度</view>
 					<view>
 						<image :src="happyCountImage" mode="widthFix" class="sortIcon"></image>
 					</view>
 				</view>
 				<!-- 帮助用户数 -->
 				<view class="d-flex a-center j-center" @click="helpVisitorsCount">
-					<view :class="sortType===1?'main-color':''" style="font-size: 27rpx;">帮助用户数</view>
+					<view :class="sortType===1?'main-font':'normal-font'">帮助用户数</view>
 					<view>
 						<image :src="helpCountImage" mode="widthFix" class="sortIcon"></image>
 					</view>
 				</view>
 				<!-- 是否空闲 -->
 				<view class="d-flex a-center j-center" @click="isAvailable">
-					<view :class="sortType===2?'main-color':''" class="mr-1" style="font-size: 27rpx;">是否空闲</view>
+					<view :class="sortType===2?'main-font':'normal-font'" class="mr-1">是否空闲</view>
 					<view class="mr-2">
 						<checkbox :checked="count.isChecked" @click="avaliableChecked" class="checkbox"></checkbox>
 					</view>
@@ -172,9 +172,13 @@
 		background-color: #EDEDED;
 	}
 
-	.main-color {
+	.main-font {
 		font-weight: 700;
-		font-size: 31rpx;
+		font-size: 32rpx;
+	}
+	.normal-font{
+		font-weight: 500;
+		font-size: 28rpx;
 	}
 
 	.top-image {

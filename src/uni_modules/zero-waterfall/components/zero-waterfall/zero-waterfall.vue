@@ -228,7 +228,7 @@
 	}
 
 	.accumulate {
-		font-size: 30rpx;
+		font-size: 28rpx;
 		margin-left: 10rpx;
 		margin-top: 10rpx;
 		margin-bottom: 10rpx;
